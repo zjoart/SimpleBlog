@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SimpleBlog.Helpers
+@model IEnumerable<SimpleBlog.Models.BlogPost>
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "JoartBlog";
+    Layout = "_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/stylee.css" />
+</head>
+&nbsp;
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a class="btn btn-dark me-md-3" asp-action="Create">Create new Post</a>
+    </p>
+}
+
+<div class="row">
+    <div class="leftcolumn">
+        <ul>
+            @foreach (var item in Model)
+            {
+            <li class="card">
+                <h2>  @Html.DisplayFor(modelItem => item.Label)</h2>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <h5>  @Html.DisplayFor(modelItem => item.Title)</h5>
+                </a>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <div class="fakeimg" style="height:150px;">Image</div>
+                </a>
+                <p> @Html.Raw(item.Body.Chop(40))</p>
+            </li>
+            }
+        </ul>
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2>About Me</h2>
+            <div class="fakeimg" style="height:100px;">Image</div>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+        </div>
+        <div class="card">
+            <h3>Popular Post</h3>
+            <div class="fakeimg">Image</div><br>
+            <div class="fakeimg">Image</div><br>
+            <div class="fakeimg">Image</div>
+        </div>
+        <div class="card">
+            <h3>Follow Me</h3>
+            <p>Some text..</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <h2>Footer</h2>
+</div>
