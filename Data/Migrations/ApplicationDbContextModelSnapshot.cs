@@ -227,6 +227,7 @@ namespace SimpleBlog.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Body")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Label")
@@ -235,7 +236,11 @@ namespace SimpleBlog.Data.Migrations
                     b.Property<int>("Like")
                         .HasColumnType("int");
 
+                    b.Property<string>("PostImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -254,6 +259,7 @@ namespace SimpleBlog.Data.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("CommentBody")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

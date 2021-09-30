@@ -1,4 +1,4 @@
-﻿@model SimpleBlog.Models.BlogPost
+﻿@model SimpleBlog.ViewModels.BlogImageViewModel
 
 @{
     Layout = null;
@@ -10,48 +10,79 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
+    <link rel="stylesheet" href="~/lib/bootstrap-blog/dist/css/bootstrap.min.css" />
 </head>
 <body>
+    <div class="container">
+        <h4>Create Post</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form enctype="multipart/form-data" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BlogPost.Title" class="control-label"></label>
+                            <input asp-for="BlogPost.Title" class="form-control" />
+                            <span asp-validation-for="BlogPost.Title" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BlogPost.Label" class="control-label"></label>
+                            <input asp-for="BlogPost.Label" class="form-control" />
+                            <span asp-validation-for="BlogPost.Label" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BlogPost.Like" class="control-label"></label>
+                            <input asp-for="BlogPost.Like" class="form-control" />
+                            <span asp-validation-for="BlogPost.Like" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BlogPost.Body" class="control-label"></label>
+                            <textarea rows="3" asp-for="BlogPost.Body" class="form-control"></textarea>
+                            <span asp-validation-for="BlogPost.Body" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PostImage" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="PostImage" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                            <span asp-validation-for="PostImage" class="text-danger"></span>
+                        </div>
+                    </div>
+            &nbsp;
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+            </div>
+            &nbsp;
+            </form>
+        </div>
+        </div>
 
-<h4>BlogPost</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Label" class="control-label"></label>
-                <input asp-for="Label" class="form-control" />
-                <span asp-validation-for="Label" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Like" class="control-label"></label>
-                <input asp-for="Like" class="form-control" />
-                <span asp-validation-for="Like" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
-                <span asp-validation-for="Body" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            <script type="text/javascript">
+
+                // Add the following code if you want the name of the file appear on select
+                $(".custom-file-input").on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+            </script>
+        }
+
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
 </body>
 </html>

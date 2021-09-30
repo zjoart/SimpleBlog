@@ -2,7 +2,7 @@
 
 namespace SimpleBlog.Data.Migrations
 {
-    public partial class AddedModels : Migration
+    public partial class InitialModelUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,10 +12,11 @@ namespace SimpleBlog.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
                     Label = table.Column<string>(nullable: true),
                     Like = table.Column<int>(nullable: false),
-                    Body = table.Column<string>(nullable: true)
+                    PostImage = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,7 @@ namespace SimpleBlog.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    CommentBody = table.Column<string>(nullable: true),
+                    CommentBody = table.Column<string>(nullable: false),
                     BlogPostId = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>

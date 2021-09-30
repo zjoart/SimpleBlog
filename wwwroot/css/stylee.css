@@ -2,10 +2,9 @@
 
 /* Header/Blog Title */
 .card-text {
-    width: 270px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    position: relative;
+    display: block;
+    font-size: 12px;
 }
 
 
@@ -17,6 +16,10 @@
 }
 
 /* Right column */
+.img-d {
+    width: 100%;
+    
+}
 .rightcolumn {
     float: left;
     width: 25%;

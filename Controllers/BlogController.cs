@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +16,12 @@ namespace SimpleBlog.Controllers
     public class BlogController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-       
-        public BlogController(ApplicationDbContext context)
+        public BlogController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = hostEnvironment;
         }
 
         // GET: Blog
@@ -63,26 +66,55 @@ namespace SimpleBlog.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Label,Like,Body")] BlogPost blogPost)
+        public async Task<IActionResult> Create(BlogImageViewModel blogmodel)
         {
+
             if (ModelState.IsValid)
             {
+                string uniqueFileName = UploadedFile(blogmodel);
+                BlogPost blogPost = new BlogPost
+                {
+                    Title = blogmodel.BlogPost.Title,
+                    Body = blogmodel.BlogPost.Body,
+                    Like = blogmodel.BlogPost.Like,
+                    Label = blogmodel.BlogPost.Label,
+                    PostImage = uniqueFileName
+                };
                 _context.Add(blogPost);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(blogPost);
+            return View();
         }
+
+        private  string UploadedFile(BlogImageViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.PostImage != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.PostImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+            model.PostImage.CopyTo(fileStream);
+            }
+            return uniqueFileName;
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateComment([Bind("Id,Name,CommentBody,BlogPostId")] Comment comment)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return Content("ok");
+
+                int id = (int) comment.BlogPostId;
+               return RedirectToAction("Details", new { id = id });
             }
-            return Content("Not Saved");
+            return View();
         }
 
         // GET: Blog/Edit/5
