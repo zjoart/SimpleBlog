@@ -2,7 +2,7 @@
 
 namespace SimpleBlog.Data.Migrations
 {
-    public partial class InitialModelUpdate : Migration
+    public partial class UpdatedModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,6 +12,8 @@ namespace SimpleBlog.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(nullable: false),
                     Title = table.Column<string>(nullable: false),
                     Label = table.Column<string>(nullable: true),
                     Like = table.Column<int>(nullable: false),

@@ -25,7 +25,7 @@
         {
             <div class= "text-center">
     <h4>You Currently have no Blopost written</h4>
-    <p>If you are the Admin <a asp-area="Identity" asp-page="/Account/Login">Login</a> to create a Post</p>
+    <p>If you are the Admin <a asp-action="Create">Create a Post</a> to Get Started</p>
 </div>
           }
         else
@@ -33,19 +33,20 @@
             <ul>
                 @foreach (var item in Model)
                 {
-                    <li class="card">
-                        <h4>  @Html.DisplayFor(modelItem => item.Label)</h4>
-                        <a asp-action="Details" asp-route-id="@item.Id">
-                            <h5>  @Html.DisplayFor(modelItem => item.Title)</h5>
-                        </a>
-                        <a asp-action="Details" asp-route-id="@item.Id">
-                            <div>
-                                <img class="img-d" style="height:250px;"src="~/images/@item.PostImage"
-                                     asp-append-version="true" />
-                            </div>
-                        </a>
-                        <p> @Html.Raw(item.Body.Chop(40))</p>
-                    </li>
+                <li class="card">
+                    <h4>  @Html.DisplayFor(modelItem => item.Label)</h4>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <h5>  @Html.DisplayFor(modelItem => item.Title)</h5>
+                    </a>
+                    <h5>Author: @Html.DisplayFor(modelItem => item.UserId)</h5>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <div>
+                            <img class="img-d" style="height:250px;" src="~/images/@item.PostImage"
+                                 asp-append-version="true" />
+                        </div>
+                    </a>
+                    <p> @Html.Raw(item.Body.Chop(40))</p>
+                </li>
                 }
             </ul>
         }

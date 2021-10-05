@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using SimpleBlog.Data;
 using SimpleBlog.Models;
 using SimpleBlog.ViewModels;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SimpleBlog.Controllers
 {
@@ -56,6 +58,7 @@ namespace SimpleBlog.Controllers
         }
 
         // GET: Blog/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -64,6 +67,7 @@ namespace SimpleBlog.Controllers
         // POST: Blog/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BlogImageViewModel blogmodel)
@@ -72,12 +76,15 @@ namespace SimpleBlog.Controllers
             if (ModelState.IsValid)
             {
                 string uniqueFileName = UploadedFile(blogmodel);
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 BlogPost blogPost = new BlogPost
                 {
-                    Title = blogmodel.BlogPost.Title,
-                    Body = blogmodel.BlogPost.Body,
-                    Like = blogmodel.BlogPost.Like,
-                    Label = blogmodel.BlogPost.Label,
+                    UserId = userId,
+                    UserName = User.Identity.Name,
+                    Title = blogmodel.Title,
+                    Body = blogmodel.Body,
+                    Like = blogmodel.Like,
+                    Label = blogmodel.Label,
                     PostImage = uniqueFileName
                 };
                 _context.Add(blogPost);
@@ -111,13 +118,14 @@ namespace SimpleBlog.Controllers
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
 
-                int id = (int) comment.BlogPostId;
-               return RedirectToAction("Details", new { id = id });
+                int Id = (int) comment.BlogPostId;
+               return RedirectToAction("Details", new { id = Id });
             }
             return View();
         }
 
         // GET: Blog/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -169,6 +177,7 @@ namespace SimpleBlog.Controllers
         }
 
         // GET: Blog/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

@@ -10,8 +10,8 @@ using SimpleBlog.Data;
 namespace SimpleBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210929085737_InitialModelUpdate")]
-    partial class InitialModelUpdate
+    [Migration("20211004095807_UpdatedModel")]
+    partial class UpdatedModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -242,6 +242,14 @@ namespace SimpleBlog.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
