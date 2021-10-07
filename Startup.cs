@@ -27,24 +27,44 @@ namespace SimpleBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-            // Parse connection URL to connection string for Npgsql
-            connUrl = connUrl.Replace("postgres://", string.Empty);
 
-            var pgUserPass = connUrl.Split("@")[0];
-            var pgHostPortDb = connUrl.Split("@")[1];
-            var pgHostPort = pgHostPortDb.Split("/")[0];
 
-            var pgDb = pgHostPortDb.Split("/")[1];
-            var pgUser = pgUserPass.Split(":")[0];
-            var pgPass = pgUserPass.Split(":")[1];
-            var pgHost = pgHostPort.Split(":")[0];
-            var pgPort = pgHostPort.Split(":")[1];
-
-            var connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Prefer;Trust Server Certificate=true";
             services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseNpgsql(connStr));
+            {
+
+                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                string connStr;
+
+                if (env == "Development")
+                {
+                    connStr = Configuration.GetConnectionString("PostConnection");
+
+                }
+                else
+                {
+
+                    var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+                    // Parse connection URL to connection string for Npgsql
+                    connUrl = connUrl.Replace("postgres://", string.Empty);
+
+                    var pgUserPass = connUrl.Split("@")[0];
+                    var pgHostPortDb = connUrl.Split("@")[1];
+                    var pgHostPort = pgHostPortDb.Split("/")[0];
+
+                    var pgDb = pgHostPortDb.Split("/")[1];
+                    var pgUser = pgUserPass.Split(":")[0];
+                    var pgPass = pgUserPass.Split(":")[1];
+                    var pgHost = pgHostPort.Split(":")[0];
+                    var pgPort = pgHostPort.Split(":")[1];
+
+                  connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Prefer;Trust Server Certificate=true";
+                }
+                options.UseNpgsql(connStr);
+
+            });
+               
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
