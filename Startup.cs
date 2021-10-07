@@ -60,9 +60,9 @@ namespace SimpleBlog
                     var pgHost = pgHostPort.Split(":")[0];
                     var pgPort = pgHostPort.Split(":")[1];
 
-                    // connStr = $"Host={pgHost};Port={pgPort};Database={pgDb};UserID={pgUser}Password={pgPass};sslmode=Prefer;Trust Server Certificate=true";
+                     connStr = $"Server={pgHost};Port={pgPort};Database={pgDb};User Id={pgUser}Password={pgPass};sslmode=Prefer;Trust Server Certificate=true";
                    
-                    connStr = Configuration.GetConnectionString("DeployConnection");
+                   // connStr = Configuration.GetConnectionString("DeployConnection");
                 }
                 options.UseNpgsql(connStr);
 
