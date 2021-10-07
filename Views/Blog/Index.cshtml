@@ -1,0 +1,97 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SimpleBlog.Helpers
+@model IEnumerable<SimpleBlog.Models.BlogPost>
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "JoartBlog";
+    Layout = "_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/stylee.css" />
+</head>
+&nbsp;
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a class="btn btn-dark me-md-3" asp-action="Create">Create new Post</a>
+    </p>
+}
+
+<div class="row">
+    <div class="leftcolumn">
+        @if (Model.Any() == false)
+        {
+            <div class= "text-center">
+    <h4>You Currently have no Blopost written</h4>
+    <p>If you are the Admin <a asp-action="Create">Create a Post</a> to Get Started</p>
+</div>
+          }
+        else
+        {
+            <ul>
+                @foreach (var item in Model)
+                {
+                <li class="card">
+                    <h4>  @Html.DisplayFor(modelItem => item.Label)</h4>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <h5>  @Html.DisplayFor(modelItem => item.Title)</h5>
+                    </a>
+                    <h5>Author: @Html.DisplayFor(modelItem => item.UserId)</h5>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <div>
+                            <img class="img-d" style="height:250px;" src="~/images/@item.PostImage"
+                                 asp-append-version="true" />
+                        </div>
+                    </a>
+                    <p> @Html.Raw(item.Body.Chop(40))</p>
+                </li>
+                }
+            </ul>
+        }
+
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2>About Me</h2>
+            <div>
+                <img class="img-d" style="height:250px;" src="~/images/me.jpg"
+                     asp-append-version="true" />
+            </div>
+            <p>I am Ayomide an Apiring Medical Physicist & Software Engineer</p>
+        </div>
+        <div class="card">
+            <h3>Popular Posts</h3>
+            @if (Model.Any() == true)
+            {
+               foreach (var item in Model)
+                {
+                    if (item.Like >= 5)
+                    {<div class="card">
+
+        <h5>  @Html.DisplayFor(modelItem => item.Label)</h5>
+        <a asp-action="Details" asp-route-id="@item.Id">
+            <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
+        </a>
+        <div>
+            <img class="img-d" src="~/images/@item.PostImage"
+                 asp-append-version="true" />
+        </div>
+    </div><br>
+    }
+    }
+    }
+    else
+    {
+    <p>There is currently no Popular post</p>
+    }
+
+</div>
+        <div class="card">
+            <h3>Follow Me</h3>
+            <h6>Twitter: zjoart</h6>
+            <h6>Github: zjoart</h6>
+        </div>
+    </div>
+</div>

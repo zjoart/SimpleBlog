@@ -1,0 +1,31 @@
+﻿@model SimpleBlog.Models.Comment
+
+<h4>Add Comment </h4>
+@using (Html.BeginForm("CreateComment", "Blog", new { BlogPostId = Model.BlogPostId }))
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <input type="hidden" asp-for="BlogPostId" value="@ViewData["BlogId"]" class="form-control" />
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="CommentBody" class="control-label"></label>
+            <textarea rows="3" asp-for="CommentBody" class="form-control"></textarea>
+            <span asp-validation-for="CommentBody" class="text-danger"></span>
+        </div>
+        </div>
+        <div>  &nbsp;</div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+        }
+        &nbsp;
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

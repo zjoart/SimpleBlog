@@ -1,0 +1,87 @@
+﻿@model SimpleBlog.ViewModels.BlogViewModel
+
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+
+&nbsp;
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BlogPosts.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BlogPosts.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BlogPosts.Label)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BlogPosts.Label)
+        </dd>
+        <dt class="col-sm-2">
+            Likes
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BlogPosts.Like)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BlogPosts.Body)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BlogPosts.Body)
+        </dd>
+    </dl>
+</div>
+<h4>Comments</h4>
+
+
+@if (Model.Comments != null)
+{
+    @foreach (var item in Model.Comments)
+    {
+<dl class="row">
+    <dt class="col-sm-2">
+       @Html.DisplayNameFor(modelItem => item.Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(modelItem => item.Name)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(modelItem => item.CommentBody)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(modelItem => item.CommentBody)
+    </dd> 
+
+</dl>
+        }
+}
+else
+{
+    <div class="text-center">
+        <p>There is currently no Comments</p>
+    </div>
+}
+@{
+
+    int yid = Model.BlogPosts.Id;
+}
+    &nbsp;
+
+<div>
+    <partial name="_CommentPartial" model="@new Comment()" view-data='@new ViewDataDictionary(ViewData) { { "BlogId", yid } }' />
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BlogPosts.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
