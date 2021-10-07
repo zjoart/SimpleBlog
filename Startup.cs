@@ -42,7 +42,7 @@ namespace SimpleBlog
             var pgHost = pgHostPort.Split(":")[0];
             var pgPort = pgHostPort.Split(":")[1];
 
-            var connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb}";
+            var connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Prefer;Trust Server Certificate=true";
             services.AddDbContext<ApplicationDbContext>(options =>
           options.UseNpgsql(connStr));
 
