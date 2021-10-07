@@ -34,6 +34,7 @@ namespace SimpleBlog
             {
 
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
                 string connStr;
 
                 if (env == "Development")
@@ -59,9 +60,9 @@ namespace SimpleBlog
                     var pgHost = pgHostPort.Split(":")[0];
                     var pgPort = pgHostPort.Split(":")[1];
 
-                    connStr = $"Host={pgHost};Port={pgPort};Database={pgDb};UserID={pgUser}Password={pgPass};sslmode=Prefer;Trust Server Certificate=true";
-               
-                
+                    // connStr = $"Host={pgHost};Port={pgPort};Database={pgDb};UserID={pgUser}Password={pgPass};sslmode=Prefer;Trust Server Certificate=true";
+                    Console.WriteLine("Cornurl issssssssssssssss {0}", connUrl);
+                    connStr = Configuration.GetConnectionString("DeployConnection");
                 }
                 options.UseNpgsql(connStr);
 
