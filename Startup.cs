@@ -62,7 +62,7 @@ namespace SimpleBlog
 
                      connStr = $"Server={pgHost};Port={pgPort};Database={pgDb};User Id={pgUser};Password={pgPass};sslmode=Prefer;Trust Server Certificate=true";
                    
-                   // connStr = Configuration.GetConnectionString("DeployConnection");
+
                 }
                 options.UseNpgsql(connStr);
 
