@@ -39,7 +39,7 @@ namespace SimpleBlog
 
                 if (env == "Development")
                 {
-                    connStr = Configuration.GetConnectionString("DeployConnection");
+                    connStr = Configuration.GetConnectionString("PostConnection");
 
                 }
                 else
@@ -61,7 +61,7 @@ namespace SimpleBlog
                     var pgPort = pgHostPort.Split(":")[1];
 
                     // connStr = $"Host={pgHost};Port={pgPort};Database={pgDb};UserID={pgUser}Password={pgPass};sslmode=Prefer;Trust Server Certificate=true";
-                    Console.WriteLine("Cornurl issssssssssssssss {0}", connUrl);
+                   
                     connStr = Configuration.GetConnectionString("DeployConnection");
                 }
                 options.UseNpgsql(connStr);
