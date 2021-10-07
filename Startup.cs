@@ -39,7 +39,7 @@ namespace SimpleBlog
 
                 if (env == "Development")
                 {
-                    connStr = Configuration.GetConnectionString("PostConnection");
+                    connStr = Configuration.GetConnectionString("DeployConnection");
 
                 }
                 else

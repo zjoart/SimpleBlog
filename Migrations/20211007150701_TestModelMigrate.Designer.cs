@@ -10,8 +10,8 @@ using SimpleBlog.Data;
 namespace SimpleBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211007134613_InitialModel")]
-    partial class InitialModel
+    [Migration("20211007150701_TestModelMigrate")]
+    partial class TestModelMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
