@@ -14,7 +14,6 @@ namespace SimpleBlog.Data
         {
         }
 
-        public DbSet<Customer> Customer { get; set; }
         public DbSet<BlogPost> BlogPost { get; set; }
         public DbSet<Comment> Comment { get; set; }
     }

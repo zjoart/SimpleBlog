@@ -10,8 +10,8 @@ using SimpleBlog.Data;
 namespace SimpleBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211007150701_TestModelMigrate")]
-    partial class TestModelMigrate
+    [Migration("20211008160847_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -276,21 +276,6 @@ namespace SimpleBlog.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Comment");
-                });
-
-            modelBuilder.Entity("SimpleBlog.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

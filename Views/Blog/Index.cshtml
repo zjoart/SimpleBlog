@@ -59,35 +59,9 @@
                 <img class="img-d" style="height:250px;" src="~/images/me.jpg"
                      asp-append-version="true" />
             </div>
-            <p>I am Ayomide an Apiring Medical Physicist & Software Engineer</p>
+            <p>I am Ayomide an Apiring Medical Physicist,Software & Network Engineer</p>
         </div>
-        <div class="card">
-            <h3>Popular Posts</h3>
-            @if (Model.Any() == true)
-            {
-               foreach (var item in Model)
-                {
-                    if (item.Like >= 5)
-                    {<div class="card">
-
-        <h5>  @Html.DisplayFor(modelItem => item.Label)</h5>
-        <a asp-action="Details" asp-route-id="@item.Id">
-            <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
-        </a>
-        <div>
-            <img class="img-d" src="~/images/@item.PostImage"
-                 asp-append-version="true" />
-        </div>
-    </div><br>
-    }
-    }
-    }
-    else
-    {
-    <p>There is currently no Popular post</p>
-    }
-
-</div>
+     
         <div class="card">
             <h3>Follow Me</h3>
             <h6>Twitter: zjoart</h6>

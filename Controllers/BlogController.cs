@@ -12,6 +12,8 @@ using SimpleBlog.Models;
 using SimpleBlog.ViewModels;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace SimpleBlog.Controllers
 {
@@ -19,10 +21,12 @@ namespace SimpleBlog.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ILogger<BlogController> _logger;
 
-        public BlogController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        public BlogController(ApplicationDbContext context, ILogger<BlogController> logger, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _logger = logger;
             _webHostEnvironment = hostEnvironment;
         }
 
@@ -59,6 +63,7 @@ namespace SimpleBlog.Controllers
 
         // GET: Blog/Create
         [Authorize]
+        [Route("create")]
         public IActionResult Create()
         {
             return View();
@@ -209,6 +214,13 @@ namespace SimpleBlog.Controllers
         private bool BlogPostExists(int id)
         {
             return _context.BlogPost.Any(e => e.Id == id);
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
