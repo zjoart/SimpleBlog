@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleBlog.Data;
+using SimpleBlog.Helpers.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
