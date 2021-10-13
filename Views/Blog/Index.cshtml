@@ -2,9 +2,6 @@
 @using SimpleBlog.Helpers
 @model IEnumerable<SimpleBlog.Models.BlogPost>
 @inject SignInManager<IdentityUser> SignInManager
-@{
-    ViewData["Title"] = "JoartBlog";
-}
 
 <head>
     <link rel="stylesheet" href="~/css/stylee.css" />
@@ -54,10 +51,7 @@
     <div class="rightcolumn">
         <div class="card">
             <h2>About Me</h2>
-            <div>
-                <img class="img-d" style="height:250px;" src="~/images/me.jpg"
-                     asp-append-version="true" />
-            </div>
+            
             <p>I am Ayomide an Apiring Medical Physicist,Software & Network Engineer</p>
         </div>
      

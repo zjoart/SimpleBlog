@@ -15,7 +15,7 @@ namespace SimpleBlog.Helpers.Filters
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            context.Result = new RedirectResult("create"); //Redirect to you desired page
+            context.Result = new RedirectResult("/"); //Redirect to you desired page
 
         }
     }
@@ -27,4 +27,6 @@ namespace SimpleBlog.Helpers.Filters
         {
         }
     }
+
+   
 }
