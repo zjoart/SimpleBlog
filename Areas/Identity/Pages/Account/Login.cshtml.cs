@@ -70,12 +70,13 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+            _logger.LogInformation("aa : ", ReturnUrl);
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-
+            _logger.LogInformation(returnUrl);
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -84,7 +85,7 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return RedirectToPage(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {

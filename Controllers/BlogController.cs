@@ -222,5 +222,14 @@ namespace SimpleBlog.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        //https://localhost:44397/Identity/Account/Login?ReturnUrl=%2Fcreate
+        [Route("Identity/Account/Login")]
+        public IActionResult LoginRedirect(string ReturnUrl)
+        {
+            _logger.LogInformation(ReturnUrl);
+            return Redirect($"/admin/login?ReturnUrl={ReturnUrl}");
+        }
     }
 }

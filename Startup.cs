@@ -108,10 +108,11 @@ namespace SimpleBlog
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Blog}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+               
             });
         }
     }
