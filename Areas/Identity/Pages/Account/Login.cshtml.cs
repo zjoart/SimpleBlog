@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging;
 namespace SimpleBlog.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    [Authorize(Policy = "RequireAdministratorRole")]
     public class LoginModel : PageModel
     {
 
@@ -70,17 +69,13 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
-            _logger.LogInformation("aa : ", ReturnUrl);
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
           returnUrl ??= Url.Content("~/");
-            _logger.LogInformation(returnUrl);
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
@@ -103,7 +98,6 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
     }

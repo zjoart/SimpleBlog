@@ -34,7 +34,7 @@
                     <a asp-action="Details" asp-route-id="@item.Id">
                         <h5>  @Html.DisplayFor(modelItem => item.Title)</h5>
                     </a>
-                    <h5>Author: @Html.DisplayFor(modelItem => item.UserId)</h5>
+                    <h5>Author: @Html.DisplayFor(modelItem => item.UserName)</h5>
                     <a asp-action="Details" asp-route-id="@item.Id">
                         <div>
                             <img class="img-d" style="height:250px;" src="~/images/@item.PostImage"

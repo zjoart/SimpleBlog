@@ -1,75 +1,63 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
 @model SimpleBlog.ViewModels.BlogImageViewModel
-@inject UserManager<IdentityUser> UserManager
 
 @{
   //  Layout = null;
 }
 
-<!DOCTYPE html>
-
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>Create</title>
-    <link rel="stylesheet" href="~/lib/bootstrap-blog/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/filestyle.css" />
 </head>
-<body>
-    <div class="container">
-        <h4>Create Post</h4>
-        <hr />
-        <div class="row">
-            <div class="col-md-4">
-                <form enctype="multipart/form-data" asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for=" Title" class="control-label"></label>
-                            <input asp-for=" Title" class="form-control" />
-                            <span asp-validation-for=" Title" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for=" Label" class="control-label"></label>
-                            <input asp-for=" Label" class="form-control" />
-                            <span asp-validation-for=" Label" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for=" Like" class="control-label"></label>
-                            <input asp-for=" Like" class="form-control" />
-                            <span asp-validation-for=" Like" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for=" Body" class="control-label"></label>
-                            <textarea rows="3" asp-for=" Body" class="form-control"></textarea>
-                            <span asp-validation-for=" Body" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="PostImage" class="control-label"></label>
 
-                            <div class="custom-file">
-                                <label class="custom-file-upload" for="customFile">Choose file</label>
-                                <input type="file" asp-for="PostImage" class="custom-file-input" id="customFile">
-
-                            </div>
-                            <span asp-validation-for="PostImage" class="text-danger"></span>
-                        </div>
+<div class="container">
+    <h4>Create Post</h4>
+    &nbsp;
+    <div class="row">
+        <div class="col-md-4">
+            <form enctype="multipart/form-data" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for=" Title" class="control-label"></label>
+                        <input asp-for=" Title" class="form-control" />
+                        <span asp-validation-for=" Title" class="text-danger"></span>
                     </div>
-
-            &nbsp;
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
-            </div>
-            &nbsp;
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for=" Label" class="control-label"></label>
+                        <input asp-for=" Label" class="form-control" />
+                        <span asp-validation-for=" Label" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for=" Like" class="control-label"></label>
+                        <input asp-for=" Like" class="form-control" />
+                        <span asp-validation-for=" Like" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for=" Body" class="control-label"></label>
+                        <textarea rows="3" asp-for=" Body" class="form-control"></textarea>
+                        <span asp-validation-for=" Body" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PostImage" class=""></label>
+                            <input type="file" asp-for="PostImage" class="custom-file-upload">
+                        </div>
+                        <span asp-validation-for="PostImage" class="text-danger"></span>
+       
+                </div>
+                &nbsp;
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                </div>
+                &nbsp;
             </form>
         </div>
     </div>
@@ -87,9 +75,8 @@
             });
         </script>
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-       
+
     }
 
-    </div>
-</body>
-</html>
+</div>
+

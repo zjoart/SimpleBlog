@@ -61,17 +61,13 @@ namespace SimpleBlog.Controllers
             return View(blog);
         }
 
-        // GET: Blog/Create
-        [Authorize]
-        [Route("create")]
+      [Authorize(Policy = "RequireAdministratorRole")]
+   
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Blog/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
       
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -228,7 +224,6 @@ namespace SimpleBlog.Controllers
         [Route("Identity/Account/Login")]
         public IActionResult LoginRedirect(string ReturnUrl)
         {
-           _logger.LogInformation(ReturnUrl);
             return Redirect("/admin/login?ReturnUrl=" + Url.Content($"~{ReturnUrl}"));
              //   RedirectToPage("/admin/login", new { ReturnUrl = ReturnUrl });
         }
