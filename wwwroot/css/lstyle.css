@@ -138,6 +138,7 @@ body {
         text-shadow: 0 0 10px rgba(0,0,0,0.3);
         letter-spacing: 1px;
         text-align: center;
+  font-size: 12px;
     }
 
 input {

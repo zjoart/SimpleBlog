@@ -228,8 +228,9 @@ namespace SimpleBlog.Controllers
         [Route("Identity/Account/Login")]
         public IActionResult LoginRedirect(string ReturnUrl)
         {
-            _logger.LogInformation(ReturnUrl);
-            return Redirect($"/admin/login?ReturnUrl={ReturnUrl}");
+           _logger.LogInformation(ReturnUrl);
+            return Redirect("/admin/login?ReturnUrl=" + Url.Content($"~{ReturnUrl}"));
+             //   RedirectToPage("/admin/login", new { ReturnUrl = ReturnUrl });
         }
     }
 }

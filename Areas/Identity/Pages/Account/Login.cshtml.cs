@@ -18,15 +18,15 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
     [Authorize(Policy = "RequireAdministratorRole")]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
-            ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            ILogger<LoginModel> logger
+           )
         {
-            _userManager = userManager;
+ 
             _signInManager = signInManager;
             _logger = logger;
         }
@@ -62,7 +62,7 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -75,7 +75,7 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+          returnUrl ??= Url.Content("~/");
             _logger.LogInformation(returnUrl);
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace SimpleBlog.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToPage(returnUrl);
+                    return Redirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
