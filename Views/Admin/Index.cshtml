@@ -1,7 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿
 @using SimpleBlog.Helpers
 @model IEnumerable<SimpleBlog.Models.BlogPost>
-@inject SignInManager<IdentityUser> SignInManager
+
 
 <head>
     <link rel="stylesheet" href="~/css/stylee.css" />
@@ -13,7 +13,7 @@
         {
             <div class= "text-center">
     <h4>You Currently have no Blopost written</h4>
-    <p>If you are the Admin Login to your dashboard to start creating contents 🚀</p>
+    <p>If you are the Admin <a asp-action="Create">Create a Post</a> to Get Started</p>
 </div>
           }
         else

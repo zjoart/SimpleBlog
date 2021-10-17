@@ -11,14 +11,14 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">JosyBlog</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Blog" asp-action="Index">JosyBlog</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                    <form asp-action="ShowSearch" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="search" name="SearchTerm" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                     </form>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
